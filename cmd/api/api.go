@@ -12,8 +12,9 @@ import (
 )
 
 func main() {
-	a := app.NewApi()
 	log := log.New(os.Stdout, "[APP] ", log.LstdFlags|log.Lmsgprefix)
+
+	a := app.NewApp(log)
 	a = middleware.NewMiddleware(a, log)
 
 	c := make(chan os.Signal, 1)

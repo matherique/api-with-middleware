@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+type Users interface {
+	GetUsers(context.Context, GetUsersRequest) (*GetUsersResponse, error)
+}
+
 func (a *app) GetUsers(ctx context.Context, req GetUsersRequest) (*GetUsersResponse, error) {
 	time.Sleep(5 * time.Second)
 
@@ -17,15 +21,12 @@ func (a *app) GetUsers(ctx context.Context, req GetUsersRequest) (*GetUsersRespo
 	return resp, nil
 }
 
-func (a *app) GetBooks(ctx context.Context, req GetBooksRequest) (*GetBooksResponse, error) {
-	time.Sleep(2 * time.Second)
+type GetUsersRequest struct {
+	Id int `json:"id"`
+}
 
-	resp := &GetBooksResponse{
-		Id:          1,
-		Name:        "Harry Potter",
-		Description: "Harry potter é um bruxo chato",
-		NumberPages: 400,
-	}
-
-	return resp, nil
+type GetUsersResponse struct {
+	Name  string `json:"name"`
+	Age   int    `json:"age"`
+	Email string `json:"email"`
 }
