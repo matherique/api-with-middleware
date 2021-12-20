@@ -1,11 +1,11 @@
-package api
+package app
 
 import (
 	"context"
 	"time"
 )
 
-func (a *api) GetUsers(ctx context.Context, req GetUsersRequest) (*GetUsersResponse, error) {
+func (a *app) GetUsers(ctx context.Context, req GetUsersRequest) (*GetUsersResponse, error) {
 	time.Sleep(5 * time.Second)
 
 	resp := &GetUsersResponse{
@@ -17,7 +17,7 @@ func (a *api) GetUsers(ctx context.Context, req GetUsersRequest) (*GetUsersRespo
 	return resp, nil
 }
 
-func (a *api) GetBooks(ctx context.Context, req GetBooksRequest) (*GetBooksResponse, error) {
+func (a *app) GetBooks(ctx context.Context, req GetBooksRequest) (*GetBooksResponse, error) {
 	time.Sleep(2 * time.Second)
 
 	resp := &GetBooksResponse{

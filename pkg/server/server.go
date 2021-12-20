@@ -7,16 +7,16 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/matherique/middleware/internal/api"
+	"github.com/matherique/middleware/internal/app"
 )
 
 type server struct {
-	a   api.API
+	a   app.APP
 	ctx context.Context
 	log *log.Logger
 }
 
-func NewServer(ctx context.Context, a api.API, log *log.Logger) *server {
+func NewServer(ctx context.Context, a app.APP, log *log.Logger) *server {
 	return &server{
 		a:   a,
 		ctx: ctx,
@@ -66,7 +66,7 @@ func (s *server) start(port string, mux *http.ServeMux) error {
 }
 
 func (s *server) GetUsersHandlerFunc(w http.ResponseWriter, r *http.Request) {
-	var data api.GetUsersRequest
+	var data app.GetUsersRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		w.WriteHeader(400)

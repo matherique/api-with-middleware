@@ -6,13 +6,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/matherique/middleware/internal/api"
+	"github.com/matherique/middleware/internal/app"
 	"github.com/matherique/middleware/internal/middleware"
 	"github.com/matherique/middleware/pkg/server"
 )
 
 func main() {
-	a := api.NewApi()
+	a := app.NewApi()
 	log := log.New(os.Stdout, "[APP] ", log.LstdFlags|log.Lmsgprefix)
 	a = middleware.NewMiddleware(a, log)
 

@@ -5,19 +5,19 @@ import (
 	"log"
 	"time"
 
-	"github.com/matherique/middleware/internal/api"
+	"github.com/matherique/middleware/internal/app"
 )
 
 type middleware struct {
-	api api.API
+	app app.APP
 	log *log.Logger
 }
 
-func NewMiddleware(a api.API, logger *log.Logger) api.API {
+func NewMiddleware(a app.APP, logger *log.Logger) app.APP {
 	return &middleware{a, logger}
 }
 
-func (m *middleware) GetUsers(ctx context.Context, req api.GetUsersRequest) (*api.GetUsersResponse, error) {
+func (m *middleware) GetUsers(ctx context.Context, req app.GetUsersRequest) (*app.GetUsersResponse, error) {
 	defer func(start time.Time) {
 		finish := time.Since(start)
 
@@ -25,10 +25,10 @@ func (m *middleware) GetUsers(ctx context.Context, req api.GetUsersRequest) (*ap
 		m.log.Printf("finish in %s", finish)
 	}(time.Now())
 
-	return m.api.GetUsers(ctx, req)
+	return m.app.GetUsers(ctx, req)
 }
 
-func (m *middleware) GetBooks(ctx context.Context, req api.GetBooksRequest) (*api.GetBooksResponse, error) {
+func (m *middleware) GetBooks(ctx context.Context, req app.GetBooksRequest) (*app.GetBooksResponse, error) {
 	defer func(start time.Time) {
 		finish := time.Since(start)
 
@@ -36,5 +36,5 @@ func (m *middleware) GetBooks(ctx context.Context, req api.GetBooksRequest) (*ap
 		m.log.Printf("finish in %s", finish)
 	}(time.Now())
 
-	return m.api.GetBooks(ctx, req)
+	return m.app.GetBooks(ctx, req)
 }

@@ -1,17 +1,17 @@
-package api
+package app
 
 import "context"
 
-type API interface {
+type APP interface {
 	GetUsers(context.Context, GetUsersRequest) (*GetUsersResponse, error)
 	GetBooks(context.Context, GetBooksRequest) (*GetBooksResponse, error)
 }
 
-type api struct {
+type app struct {
 }
 
-func NewApi() API {
-	return new(api)
+func NewApi() APP {
+	return new(app)
 }
 
 type GetUsersRequest struct {
